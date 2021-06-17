@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qin.management.mapper.EmployeeMapper">
+
+    <insert id="addEmployee" parameterType="Employee">
+        INSERT INTO employee (`name`,gander,email,birthday,salary,create_time,department_id)
+         values (#{name},#{gander},#{email},#{birthday},#{salary},#{createTime},#{department.id})
+    </insert>
+    
+    <update id="deleteEmployee" parameterType="int">
+        delete from employee where id = #{id}
+    </update>
+
+    <select id="getEmployeeList" resultMap="EmployeeMapper">
+        SELECT e.id, e.name,d.id did, d.name 'd_name', e.gander, e.email, e.`salary`,e.`birthday`,e.`create_time`
+        FROM employee e, department d
+        WHERE e.department_id = d.id
+    </select>
+
+    <resultMap id="EmployeeMapper" type="Employee">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="gander" column="gander"/>
+        <result property="email" column="email"/>
+        <result property="birthday" column="birthday"/>
+        <result property="salary" column="salary"/>
+        <result property="createTime" column="create_time"/>
+        <association property="department" javaType="Department">
+            <result property="id" column="did"/>
+            <result property="name" column="d_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getEmployeeById" parameterType="int" resultMap="EmployeeMapper">
+        SELECT e.id, e.name,d.id did, d.name 'd_name', e.gander, e.email, e.`salary`,e.`birthday`,e.`create_time`
+        FROM employee e, department d
+        WHERE e.department_id = d.id and e.id = #{id}
+    </select>
+
+    <select id="getEmployeeByName" parameterType="Employee" resultType="Employee">
+        select * from employee where `name` = #{name}
+    </select>
+
+    <select id="getEmployeeByKey" parameterType="Employee" resultMap="EmployeeMapper">
+        SELECT e.id, e.name,d.id did, d.name 'd_name', e.gander, e.email, e.`salary`,e.`birthday`,e.`create_time`
+        FROM employee e, department d
+        WHERE e.department_id = d.id and e.name like '%${name}%'
+    </select>
+
+    <update id="updateEmployee" parameterType="Employee">
+        update employee set `name` = #{name},gander = #{gander},email = #{email},birthday = #{birthday},salary = #{salary},department_id = #{department.id}
+         where id = #{id}
+    </update>
+
+    <select id="employeeLogin" parameterType="Employee" resultType="Employee">
+        select * from employee where `name` = #{userName} and password = md5(#{password})
+    </select>
+</mapper>
