@@ -13,6 +13,14 @@
         delete from employee where id = #{id}
     </update>
 
+    <delete id="deleteAll" parameterType="int">
+        delete FROM employee
+        <foreach item="item" index="index" collection="ids"
+                 open="WHERE id in(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
     <select id="getEmployeeList" resultMap="EmployeeMapper">
         SELECT e.id, e.name,d.id did, d.name 'd_name', e.gander, e.email, e.`salary`,e.`birthday`,e.`create_time`
         FROM employee e, department d

@@ -1,17 +1,16 @@
 package com.qin.management.controller;
 
+import com.qin.management.pojo.Department;
 import com.qin.management.pojo.Employee;
 import com.qin.management.service.employee.EmployeeService;
 import com.qin.management.service.mail.MailServiceImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -37,6 +36,25 @@ public class EmployeeController {
         return employeeService.addEmployee(employee);
     }
 
+    @RequestMapping("/add100")
+    public int add100User(){
+        Employee employee = new Employee();
+        employee.setName("test");
+        employee.setDepartment(new Department(1,null));
+        employee.setSalary((float) 5000.0);
+        employee.setEmail("123@qq.com");
+        employee.setBirthday(LocalDate.now());
+        employee.setGander(1);
+        int i = 0;
+        for (; i < 100; i++) {
+            i += employeeService.addEmployee(employee);
+        }
+        System.out.println("创建了"+i+"个员工");
+        return i;
+
+    }
+
+
     //获取用户列表
     @RequestMapping("/list")
     @ResponseBody
@@ -61,6 +79,12 @@ public class EmployeeController {
         return employeeService.deleteEmployee(id);
     }
 
+    @RequestMapping("/deleteAll")
+    public int deleteAll(@RequestParam("ids") List<Integer> ids){
+        System.out.println("delete All");
+        System.out.println(ids.toString());
+        return employeeService.deleteAll(ids);
+    }
     //根据id查用户
     @ResponseBody
     @RequestMapping("/getById")

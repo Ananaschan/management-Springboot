@@ -19,13 +19,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     public int addEmployee(Employee employee) {
         //添加创建日期
         employee.setCreateTime(LocalDate.now());
-        mailService.sendMail(employee.getEmail(),"注册提示","您的账号已经在员工管理系统中生效！");
+        //mailService.sendMail(employee.getEmail(),"注册提示","您的账号已经在员工管理系统中生效！");
         return employeeMapper.addEmployee(employee);
     }
 
     @Override
     public int deleteEmployee(int id) {
         return employeeMapper.deleteEmployee(id);
+    }
+
+    @Override
+    public int deleteAll(List<Integer> ids) {
+        return employeeMapper.deleteAll(ids);
     }
 
     @Override

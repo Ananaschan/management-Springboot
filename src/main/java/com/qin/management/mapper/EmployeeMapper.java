@@ -2,6 +2,7 @@ package com.qin.management.mapper;
 
 import com.qin.management.pojo.Employee;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public interface EmployeeMapper {
      **/
     int deleteEmployee(int id);
 
+    int deleteAll(@Param("ids") List<Integer> ids);
     /**
      * 查询用户列表
      **/

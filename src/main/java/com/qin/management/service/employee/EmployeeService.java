@@ -1,6 +1,7 @@
 package com.qin.management.service.employee;
 
 import com.qin.management.pojo.Employee;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public interface EmployeeService {
      **/
     int deleteEmployee(int id);
 
+    int deleteAll(@Param("ids") List<Integer> ids);
     /**
      * 查询用户列表
      **/
