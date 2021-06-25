@@ -21,10 +21,30 @@
         </foreach>
     </delete>
 
+    <select id="getTotal" resultType="java.lang.Long">
+        select count(*) from employee
+    </select>
+
     <select id="getEmployeeList" resultMap="EmployeeMapper">
         SELECT e.id, e.name,d.id did, d.name 'd_name', e.gander, e.email, e.`salary`,e.`birthday`,e.`create_time`
         FROM employee e, department d
         WHERE e.department_id = d.id
+    </select>
+
+    <select id="getEmployeeListByIdsList" resultMap="EmployeeMapper">
+        SELECT e.id, e.name,d.id did, d.name 'd_name', e.gander, e.email, e.`salary`,e.`birthday`,e.`create_time`
+        FROM employee e, department d
+        WHERE e.department_id = d.id and
+        <foreach item="item" index="index" collection="ids"
+                 open="e.id in(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="getEmpByPage" resultMap="EmployeeMapper">
+        SELECT e.id, e.name,d.id did, d.name 'd_name', e.gander, e.email, e.`salary`,e.`birthday`,e.`create_time`
+        FROM employee e, department d
+        WHERE e.department_id = d.id limit #{page},#{size}
     </select>
 
     <resultMap id="EmployeeMapper" type="Employee">
@@ -47,7 +67,7 @@
         WHERE e.department_id = d.id and e.id = #{id}
     </select>
 
-    <select id="getEmployeeByName" parameterType="Employee" resultType="Employee">
+    <select id="getEmployeeByName" parameterType="Employee" resultMap="EmployeeMapper">
         select * from employee where `name` = #{name}
     </select>
 

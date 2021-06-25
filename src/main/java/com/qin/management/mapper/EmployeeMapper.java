@@ -25,13 +25,19 @@ public interface EmployeeMapper {
      **/
     List<Employee> getEmployeeList();
 
+    List<Employee> getEmployeeListByIdsList(@Param("ids")List<Integer> ids);
+
+    List<Employee> getEmpByPage(@Param("page") Integer page,@Param("size") Integer size);
+
+    Long getTotal();
+
     /**
      * 得到单个用户
      **/
     Employee getEmployeeById(int id);
 
 
-    Employee getEmployeeByName(Employee user);
+    List<Employee> getEmployeeByName(Employee user);
 
     /**
      * 关键字查询
