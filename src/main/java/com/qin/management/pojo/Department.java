@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 public class Department {
     private Integer id;
     private String name;
+    private Integer numberOfEmployees;
 }

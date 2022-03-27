@@ -8,6 +8,7 @@ class ManagementApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println((float)3/16);
     }
 
 }

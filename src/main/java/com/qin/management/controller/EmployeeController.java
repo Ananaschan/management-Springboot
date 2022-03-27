@@ -57,7 +57,7 @@ public class EmployeeController {
     public int add100User(){
         Employee employee = new Employee();
         employee.setName("test");
-        employee.setDepartment(new Department(1,null));
+        employee.setDepartment(new Department(1,null,null));
         employee.setSalary((float) 5000.0);
         employee.setEmail("123@qq.com");
         employee.setBirthday(LocalDate.now());

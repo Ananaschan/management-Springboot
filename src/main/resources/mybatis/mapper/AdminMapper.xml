@@ -10,4 +10,24 @@
     <select id="adminLogin" parameterType="Admin" resultType="Admin">
         select * from admin where `name`= #{name} and password = #{password}
     </select>
+
+    <insert id="addAdmin" parameterType="Admin">
+        INSERT INTO admin (`name`,password)
+         values (#{name},#{password})
+    </insert>
+
+    <update id="deleteAdmin" parameterType="int">
+        delete from admin where id = #{id}
+    </update>
+
+    <update id="updateAdmin" parameterType="Admin">
+        update admin set `name` = #{name}, password = #{password} where id = #{id}
+    </update>
+
+    <select id="getAdminById" parameterType="int" resultType="Admin">
+        SELECT id , `name` ,password
+        FROM admin
+        WHERE id = #{id}
+    </select>
+
 </mapper>

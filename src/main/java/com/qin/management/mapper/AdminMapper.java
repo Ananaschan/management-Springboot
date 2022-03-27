@@ -11,4 +11,11 @@ import java.util.List;
 public interface AdminMapper {
     Admin adminLogin(Admin admin);
     List<Admin> getAdminList();
+    int deleteAdmin(int id);
+
+    int addAdmin(Admin admin);
+
+    int updateAdmin(Admin admin);
+
+    Admin getAdminById(int id);
 }

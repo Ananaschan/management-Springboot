@@ -6,4 +6,23 @@
     <select id="getDepartmentList" resultType="Department">
         select * from department
     </select>
+
+    <insert id="addDepartment" parameterType="Department">
+        INSERT INTO department (`name`)
+         values (#{name})
+    </insert>
+
+    <update id="deleteDepartment" parameterType="int">
+        delete from department where id = #{id}
+    </update>
+
+    <update id="updateDepartment" parameterType="Department">
+        update department set `name` = #{name} where id = #{id}
+    </update>
+
+    <select id="getDepartmentById" parameterType="int" resultType="Department">
+        SELECT id , `name`
+        FROM department
+        WHERE id = #{id}
+    </select>
 </mapper>
