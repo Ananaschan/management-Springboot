@@ -61,10 +61,12 @@ public class EmployeeController {
         employee.setSalary((float) 5000.0);
         employee.setEmail("123@qq.com");
         employee.setBirthday(LocalDate.now());
+        employee.setCreateTime(LocalDate.now());
         employee.setGander(1);
         int i = 0;
         for (; i < 100; i++) {
-            i += employeeService.addEmployee(employee);
+            int i1 = employeeService.add100Emp(employee);
+            i+= i1;
         }
         System.out.println("创建了"+i+"个员工");
         return i;

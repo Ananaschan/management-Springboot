@@ -52,6 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return result;
     }
 
+    @Override
+    public int add100Emp(Employee employee){
+        return employeeMapper.addEmployee(employee);
+    }
+
     /**
      * 返回:
      * -1 要删除的对象不存在

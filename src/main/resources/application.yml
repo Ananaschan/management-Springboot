@@ -10,7 +10,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   mail:
     username: ananas1024@qq.com
-    password: iupwgecyovadbbfa
+    password: kzpjkxtbgavsbedf
     host: smtp.qq.com
 
 mybatis:

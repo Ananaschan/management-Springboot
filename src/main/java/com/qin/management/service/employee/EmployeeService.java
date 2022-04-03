@@ -13,6 +13,7 @@ public interface EmployeeService {
      * 添加用户
      **/
     int addEmployee(Employee employee);
+    int add100Emp(Employee employee);
 
     /**
      * 删除用户
