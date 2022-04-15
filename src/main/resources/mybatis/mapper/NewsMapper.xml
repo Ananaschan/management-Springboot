@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qin.management.mapper.NewsMapper">
+    <select id="getNewsList" resultType="News">
+        select * from news
+    </select>
+
+
+    <insert id="addNews" parameterType="News">
+        INSERT INTO news (`title`,context)
+         values (#{title},#{context})
+    </insert>
+
+    <update id="deleteNews" parameterType="int">
+        delete from news where id = #{id}
+    </update>
+
+    <update id="updateNews" parameterType="News">
+        update news set `title` = #{title}, context = #{context} where id = #{id}
+    </update>
+
+    <select id="getNewsById" parameterType="int" resultType="News">
+        SELECT id , `title` ,context
+        FROM news
+        WHERE id = #{id}
+    </select>
+
+</mapper>

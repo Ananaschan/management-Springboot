@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qin.management.mapper.PartnerMapper">
+    <select id="getPartnerList" resultType="Partner">
+        select * from partner
+    </select>
+
+
+    <insert id="addPartner" parameterType="Partner">
+        INSERT INTO partner (`name`,description)
+         values (#{name},#{description})
+    </insert>
+
+    <update id="deletePartner" parameterType="int">
+        delete from partner where id = #{id}
+    </update>
+
+    <update id="updatePartner" parameterType="Partner">
+        update partner set `name` = #{name}, description = #{description} where id = #{id}
+    </update>
+
+    <select id="getPartnerById" parameterType="int" resultType="Partner">
+        SELECT id , `name` ,description
+        FROM partner
+        WHERE id = #{id}
+    </select>
+
+</mapper>
